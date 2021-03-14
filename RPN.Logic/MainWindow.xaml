@@ -1,0 +1,48 @@
+﻿<Window x:Class="RPN_WPF_.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RPN_WPF_"
+        mc:Ignorable="d"
+        Title="Calculate" Height="400" Width="300">
+    <StackPanel >
+        <Border Background="White" BorderBrush="Black" BorderThickness="1" VerticalAlignment="Top">
+            <StackPanel Margin="5">
+                <DockPanel Margin="5">
+                    <TextBlock Text="Function:"/>
+                    <TextBox x:Name="functionBox"/>
+                </DockPanel>
+                <DockPanel Margin="5">
+                    <TextBlock Text="Step X"/>
+                    <TextBox x:Name="stepBox"/>
+                </DockPanel>
+                <DockPanel Margin="5">
+                    <TextBlock Text="Range X: Start:"/>
+                    <TextBox x:Name="startBox" Width="90"/>
+                    <TextBlock Text="End:"/>
+                    <TextBox x:Name="endBox" Width="90"/>
+                </DockPanel>
+                <DockPanel Margin="9">
+                    <Button Content="Result" Click="Result_Click"/>
+                </DockPanel>
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1">
+            <StackPanel Margin="5">
+                <DockPanel Margin="5">
+                    <TextBlock Text="RPN:"/>
+                    <TextBlock x:Name="rpn"/>
+                </DockPanel>
+                <DockPanel Margin="5">
+                    <TextBlock Text="Result:"/>
+                    <TextBlock x:Name="result"/>
+                </DockPanel>
+            </StackPanel>
+        </Border>
+        <Border>
+            
+        </Border>
+
+    </StackPanel>
+</Window>
