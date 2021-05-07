@@ -88,14 +88,15 @@ namespace AdvancedCalculate.Logic
         }
         private int GetPrior(string character)
         {
-            if (character == "+" || character == "-")
-                return 1;
-            else if (character == "*" || character == "/")
-                return 2;
-            else if (character == "^")
-                return 3;
-            else
-                return -1;
+            return character switch
+            {
+                "+" => new Minus().Priority,
+                "-" => new Plus().Priority,
+                "*" => new Multiplication().Priority,
+                "/" => new Division().Priority,
+                "^" => new Degree().Priority,
+                _ => throw new Exception("Неккоректный символ"),
+            };
         }    
     }
 }

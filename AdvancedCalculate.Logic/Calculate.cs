@@ -9,64 +9,54 @@ namespace AdvancedCalculate.Logic
     public class Calculate
     {
         private object[] PostFix { get; set; }
-        public static Dictionary<int, int> AllResultes { get; } = new Dictionary<int, int>();
-        public static List<int> allRes { get; } = new List<int>();
-        public static List<int> allX { get; } = new List<int>();
-        public Calculate(object[] postfix, int start, int end, int step)
+        public static Dictionary<double, double> AllResultes { get; } = new Dictionary<double, double>();
+        public Calculate(object[] postfix, double start, double end, double step)
         {
             PostFix = postfix;
             AllResultes.Clear();
 
             GetRezultes(start, end, step);
         }
-        private void GetRezultes(int start, int end, int step)
+        private void GetRezultes(double start, double end, double step)
         {
-            for(var i = start; i <= end; i += step)
+            for(var i = start; i <= end; Math.Round(i += step, 2))
             {
-                AllResultes.Add(i, Counting(i));
-                allRes.Add(Counting(i));
-                allX.Add(i);
+                AllResultes.Add( Math.Round(i, 2), Counting(i));
             }            
         }
-        private int Counting(int x)
+        private double Counting(double x)
         {
-             Stack<object> Rezult = new Stack<object>();
-             Сount numOne, numTwo;
+             Stack<double> Rezult = new();
+             double numOne, numTwo;
 
             foreach (var character in PostFix)
             {
-                if (character is int || (string)character == "x")
+                if (character is double || character.ToString() == "x" || character is int)
                 {
-                    Rezult.Push(character.ToString() == "x"? x : character);
+                    Rezult.Push(character.ToString() == "x"? x : Convert.ToDouble(character));
                 }
                 else
                 {
-                    numTwo = new Сount(Rezult.Pop());
-                    numOne = new Сount(Rezult.Pop());
+                    numTwo = Rezult.Pop();
+                    numOne = Rezult.Pop();
 
-                    Rezult.Push(int.Parse(GetResult(numOne, numTwo, (string)character)));
+                    Rezult.Push(GetResult(numOne, numTwo, (string)character));
                 }
             }
 
-            return (int)Rezult.Pop();
+            return (double)Rezult.Pop();
         }
-        private string GetResult(Сount numOne, Сount numTwo, string character)
+        private double GetResult(double numOne, double numTwo, string character)
         {
-            switch (character)
+            return character switch
             {
-                case "+":
-                    return (numOne + numTwo).ToString();
-                case "-":
-                    return (numOne - numTwo).ToString();
-                case "*":
-                    return (numOne * numTwo).ToString();
-                case "/":
-                    return (numOne / numTwo).ToString();
-                case "^":
-                    return (numOne ^ numTwo).ToString();
-                default:
-                    return "";
-            }
+                "+" => new Plus().Evaluate(numOne, numTwo),
+                "-" => new Minus().Evaluate(numOne, numTwo),
+                "*" => new Multiplication().Evaluate(numOne, numTwo),
+                "/" => new Division().Evaluate(numOne, numTwo),
+                "^" => new Degree().Evaluate(numOne, numTwo),
+                _ => throw new Exception("Неккоректный оператор"),
+            };
         }
     }
 }

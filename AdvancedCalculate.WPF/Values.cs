@@ -8,7 +8,7 @@ namespace AdvancedCalculate.WPF
 {
     public class Values
     {
-        private static int valueZoom { get; set; } = 2;
+        private static int valueZoom = 2;
         public static int ValueZoom
         {
             get 

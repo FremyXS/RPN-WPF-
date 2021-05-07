@@ -47,9 +47,10 @@
             </UniformGrid>
         </Border>
         <Border Padding="5" x:Name="br" DockPanel.Dock="Top">
-            <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" >
-                <Canvas x:Name="coordinateAxes" SizeChanged="CoordinateAxis_SizeChanged"  Margin="5"/>
-            </ScrollViewer>            
-        </Border>        
+            <Canvas  MouseLeftButtonDown="coordinateAxes_MouseLeftButtonDown" 
+                     MouseLeftButtonUp="coordinateAxes_MouseLeftButtonUp"
+                     MouseMove="coordinateAxes_MouseMove"
+                     x:Name="coordinateAxes" SizeChanged="CoordinateAxis_SizeChanged"  Margin="5"/>
+        </Border>
     </DockPanel>
 </Window>
