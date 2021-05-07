@@ -10,7 +10,7 @@ namespace AdvancedCalculate.Logic
     {        
         public static List<string> GetFunctionList(string function)
         {
-            List<string> listFunction = new List<string>();
+            List<string> listFunction = new();
             string sybvol = "";
             foreach (var character in function)
             {
