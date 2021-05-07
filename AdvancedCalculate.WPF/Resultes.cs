@@ -8,12 +8,12 @@ namespace AdvancedCalculate.WPF
 {
     public class Resultes
     {
-        public Resultes(int rezultX, int rezultY)
+        public Resultes(double rezultX, double rezultY)
         {
-            this.rezultX = rezultX;
-            this.rezultY = rezultY;
+            this.RezultX = rezultX;
+            this.RezultY = rezultY;
         }
-        public int rezultX { get; }
-        public int rezultY { get; }
+        public double RezultX { get; }
+        public double RezultY { get; }
     }
 }

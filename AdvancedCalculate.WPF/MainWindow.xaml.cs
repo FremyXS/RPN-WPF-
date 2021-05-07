@@ -21,6 +21,7 @@ namespace AdvancedCalculate.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Point? movePoint { get; set; }
         public MainWindow()
         {
             InitializeComponent();
@@ -43,7 +44,7 @@ namespace AdvancedCalculate.WPF
         {
             object[] rpn = new RPN(Info.GetFunctionList(function)).PostFix.ToArray();
 
-            new Calculate(rpn, int.Parse(startText.Text), int.Parse(endText.Text), int.Parse(StepText.Text));
+            new Calculate(rpn, double.Parse(startText.Text), double.Parse(endText.Text), double.Parse(StepText.Text));
 
             string rpnString = "";
 
@@ -62,20 +63,35 @@ namespace AdvancedCalculate.WPF
         private void ButtonZoomPlus(object sender, RoutedEventArgs e)
         {
             coordinateAxes.Children.Clear();
-            Values.ValueZoom += 10;
-            coordinateAxes.Height += 10;
-            coordinateAxes.Width += 10;
+            Values.ValueZoom += 5;
+            coordinateAxes.Height += 5;
+            coordinateAxes.Width += 5;
             new FunctionGraphDrawer(coordinateAxes, startText, endText);
         }
 
         private void ButtonZoomMinus(object sender, RoutedEventArgs e)
         {
             coordinateAxes.Children.Clear();
-            Values.ValueZoom -= 10;
-            coordinateAxes.Height -= 10;
-            coordinateAxes.Width -= 10;
+            Values.ValueZoom -= 5;
+            coordinateAxes.Height -= (double)5;
+            coordinateAxes.Width -= 5;
             new FunctionGraphDrawer(coordinateAxes, startText, endText);
         }
-        
+
+        private void coordinateAxes_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            movePoint = e.GetPosition(coordinateAxes);
+        }
+
+        private void coordinateAxes_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            movePoint = null;
+        }
+
+        private void coordinateAxes_MouseMove(object sender, MouseEventArgs e)
+        {
+            var p = e.GetPosition(coordinateAxes) - (Vector)movePoint.Value;
+            coordinateAxes.Margin = new Thickness(p.X, p.Y, 0, 0);
+        }
     }
 }
