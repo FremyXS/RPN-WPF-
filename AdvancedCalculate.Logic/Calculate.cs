@@ -22,7 +22,9 @@ namespace AdvancedCalculate.Logic
             for(var i = start; i <= end; Math.Round(i += step, 2))
             {
                 AllResultes.Add( Math.Round(i, 2), Counting(i));
-            }            
+            }
+
+            DeleteInfinity();
         }
         private double Counting(double x)
         {
@@ -57,6 +59,17 @@ namespace AdvancedCalculate.Logic
                 "^" => new Degree().Evaluate(numOne, numTwo),
                 _ => throw new Exception("Неккоректный оператор"),
             };
+        }
+        private void DeleteInfinity()
+        {
+            double zero = 0;
+            if (AllResultes.ContainsKey(0))
+            {
+                if (AllResultes[0] == 1/zero)
+                {
+                    AllResultes.Remove(0);
+                }
+            }
         }
     }
 }

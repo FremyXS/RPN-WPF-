@@ -21,7 +21,6 @@ namespace AdvancedCalculate.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Point? movePoint { get; set; }
         public MainWindow()
         {
             InitializeComponent();
@@ -30,11 +29,14 @@ namespace AdvancedCalculate.WPF
         private void Result_Click(object sender, RoutedEventArgs e)
         {
             if (Errors.CheckFunction(functionText.Text) && Errors.IsStep(StepText.Text) 
-                && Errors.IsStep(startText.Text) && Errors.IsStep(endText.Text)){
-                
-                rpnText.Text = GetStringRPN(functionText.Text);
+            && Errors.IsStep(startText.Text) && Errors.IsStep(endText.Text))
+            {
+                if (Errors.CheckRange(StepText.Text, startText.Text, endText.Text))
+                {
+                    rpnText.Text = GetStringRPN(functionText.Text);
 
-                WPFDrawer.GetListResultes(resultesGrid);
+                    WPFDrawer.GetListResultes(resultesGrid);
+                }
             }
 
             coordinateAxes.Children.Clear();
@@ -77,21 +79,37 @@ namespace AdvancedCalculate.WPF
             coordinateAxes.Width -= 5;
             new FunctionGraphDrawer(coordinateAxes, startText, endText);
         }
-
+        private bool isDragAndDrop { get; set; }
+        private Point pointDragAndDrop { get; set; } 
+        private Thickness marginDragAndDrop { get; set; }
         private void coordinateAxes_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            movePoint = e.GetPosition(coordinateAxes);
+            isDragAndDrop = true;
+            pointDragAndDrop = Mouse.GetPosition(this);
+            marginDragAndDrop = coordinateAxes.Margin;
         }
 
         private void coordinateAxes_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            movePoint = null;
+            isDragAndDrop = false;
         }
 
         private void coordinateAxes_MouseMove(object sender, MouseEventArgs e)
         {
-            var p = e.GetPosition(coordinateAxes) - (Vector)movePoint.Value;
-            coordinateAxes.Margin = new Thickness(p.X, p.Y, 0, 0);
+            var current = Mouse.GetPosition(this);
+            var offset = current - pointDragAndDrop;
+            if (isDragAndDrop)
+            {
+                current = Mouse.GetPosition(this);
+                offset = current - pointDragAndDrop; 
+                coordinateAxes.Margin = new Thickness(marginDragAndDrop.Left + offset.X, marginDragAndDrop.Top + offset.Y, 0, 0);
+
+            }
+        }
+
+        private void coordinateAxes_MouseLeave(object sender, MouseEventArgs e)
+        {
+            isDragAndDrop = false;
         }
     }
 }
