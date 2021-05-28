@@ -6,58 +6,50 @@ using System.Threading.Tasks;
 
 namespace AdvancedCalculate.Logic
 {
-    public enum Operators
-    {
-        Plus,
-        Minus,
-        Division,
-        Multiplication,
-        Degree
-    }
     public abstract class Operation
     {
-        public abstract Operators Name { get; }
+        public abstract string Name { get; }
         public abstract int Priority { get; }
-        public abstract double Evaluate(double numberOne, double numberTwo);
+        public abstract double Evaluate(List<double> nums);
 
     }
     public class Plus : Operation
     {
-        public override Operators Name => Operators.Plus;
+        public override string Name => "+";
         public override int Priority => 1;
 
-        public override double Evaluate(double numberOne, double numberTwo)
-            => Math.Round(numberOne + numberTwo, 2);
+        public override double Evaluate(List<double> nums)
+            => Math.Round(nums[1] + nums[0], 2);
 
     }
     public class Minus : Operation
     {
-        public override Operators Name => Operators.Plus;
+        public override string Name => "-";
         public override int Priority => 1;
-        public override double Evaluate(double numberOne, double numberTwo)
-            => Math.Round(numberOne - numberTwo, 2);
+        public override double Evaluate(List<double> nums)
+            => Math.Round(nums[1] - nums[0], 2);
     }
     public class Multiplication : Operation
     {
-        public override Operators Name => Operators.Plus;
+        public override string Name => "*";
         public override int Priority => 2;
-        public override double Evaluate(double numberOne, double numberTwo)
-            => Math.Round(numberOne * numberTwo, 2);
+        public override double Evaluate(List<double> nums)
+            => Math.Round(nums[1] * nums[0], 2);
     }
     public class Division : Operation
     {
-        public override Operators Name => Operators.Plus;
+        public override string Name => "/";
         public override int Priority => 2;
-        public override double Evaluate(double numberOne, double numberTwo)
-            => Math.Round(numberOne / numberTwo, 2);
+        public override double Evaluate(List<double> nums)
+            => Math.Round(nums[1] / nums[0], 2);
     }
     public class Degree : Operation
     {
-        public override Operators Name => Operators.Plus;
+        public override string Name => "^";
         public override int Priority => 3;
-        public override double Evaluate(double numberOne, double numberTwo)
-            => Math.Round(Math.Pow(numberOne, numberTwo), 2);
+        public override double Evaluate(List<double> nums)
+            => Math.Round(Math.Pow(nums[1], nums[0]), 2);
     }
-
+    
 
 }

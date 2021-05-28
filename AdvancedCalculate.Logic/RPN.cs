@@ -19,17 +19,18 @@ namespace AdvancedCalculate.Logic
         }
         private void GetPostfix()
         {
-            foreach(var character in Function)
+            foreach(string character in Function)
             {
                 if(!Operations.Contains(character))
                 {
-                    PostFix.Enqueue(character == "x" ? character : int.Parse(character));
+                    PostFix.Enqueue(character == "x" ? character : double.Parse(character));
                 }
-                else if (character == "(")
+
+                if (character is "(")
                 {
                     Stack.Push(character);
                 }
-                else if (character == ")")
+                else if (character is ")")
                 {
                     while(Stack.Count != 0 )
                     {
@@ -44,12 +45,13 @@ namespace AdvancedCalculate.Logic
                         }
                     }
                 }
-                else if (IsOperator(character))
+
+                if (IsOperator(character))
                 {
                     if (Stack.Count == 0)
                     {
                         Stack.Push(character);
-                    }
+                    }                    
                     else
                     {
                         if(GetPrior(character) > GetPrior(Stack.Peek()))
@@ -81,7 +83,11 @@ namespace AdvancedCalculate.Logic
         }
         private bool IsOperator(string character)
         {
-            if (character == "+" || character == "-" || character == "*" || character == "/" || character == "^")
+            if (character == new Plus().Name 
+            || character == new Minus().Name 
+            || character == new Multiplication().Name 
+            || character == new Division().Name 
+            || character == new Degree().Name)
                 return true;
             else
                 return false;
@@ -95,7 +101,7 @@ namespace AdvancedCalculate.Logic
                 "*" => new Multiplication().Priority,
                 "/" => new Division().Priority,
                 "^" => new Degree().Priority,
-                _ => throw new Exception("Неккоректный символ"),
+                _ => -1,
             };
         }    
     }
