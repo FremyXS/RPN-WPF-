@@ -1,0 +1,12 @@
+D:\proga\AdvancedCalculate\AdvancedCalculate.Logic\bin\Debug\net5.0\AdvancedCalculate.Logic.deps.json
+D:\proga\AdvancedCalculate\AdvancedCalculate.Logic\bin\Debug\net5.0\AdvancedCalculate.Logic.dll
+D:\proga\AdvancedCalculate\AdvancedCalculate.Logic\bin\Debug\net5.0\ref\AdvancedCalculate.Logic.dll
+D:\proga\AdvancedCalculate\AdvancedCalculate.Logic\bin\Debug\net5.0\AdvancedCalculate.Logic.pdb
+D:\proga\AdvancedCalculate\AdvancedCalculate.Logic\obj\Debug\net5.0\AdvancedCalculate.Logic.GeneratedMSBuildEditorConfig.editorconfig
+D:\proga\AdvancedCalculate\AdvancedCalculate.Logic\obj\Debug\net5.0\AdvancedCalculate.Logic.AssemblyInfoInputs.cache
+D:\proga\AdvancedCalculate\AdvancedCalculate.Logic\obj\Debug\net5.0\AdvancedCalculate.Logic.AssemblyInfo.cs
+D:\proga\AdvancedCalculate\AdvancedCalculate.Logic\obj\Debug\net5.0\AdvancedCalculate.Logic.csproj.CoreCompileInputs.cache
+D:\proga\AdvancedCalculate\AdvancedCalculate.Logic\obj\Debug\net5.0\AdvancedCalculate.Logic.dll
+D:\proga\AdvancedCalculate\AdvancedCalculate.Logic\obj\Debug\net5.0\ref\AdvancedCalculate.Logic.dll
+D:\proga\AdvancedCalculate\AdvancedCalculate.Logic\obj\Debug\net5.0\AdvancedCalculate.Logic.pdb
+D:\proga\AdvancedCalculate\AdvancedCalculate.Logic\obj\Debug\net5.0\AdvancedCalculate.Logic.csprojAssemblyReference.cache
