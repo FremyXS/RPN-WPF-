@@ -28,8 +28,8 @@ namespace AdvancedCalculate.Logic
         }
         private double Counting(double x)
         {
-             Stack<double> Rezult = new();
-             double numOne, numTwo;
+            Stack<double> Rezult = new();
+            List<double> nums = new();
 
             foreach (var character in PostFix)
             {
@@ -39,24 +39,24 @@ namespace AdvancedCalculate.Logic
                 }
                 else
                 {
-                    numTwo = Rezult.Pop();
-                    numOne = Rezult.Pop();
+                    nums.Add(Rezult.Pop());
+                    nums.Add(Rezult.Pop());
 
-                    Rezult.Push(GetResult(numOne, numTwo, (string)character));
+                    Rezult.Push(GetResult(nums, (string)character));
                 }
             }
 
             return (double)Rezult.Pop();
         }
-        private double GetResult(double numOne, double numTwo, string character)
+        private double GetResult(List<double> nums, string character)
         {
             return character switch
             {
-                "+" => new Plus().Evaluate(numOne, numTwo),
-                "-" => new Minus().Evaluate(numOne, numTwo),
-                "*" => new Multiplication().Evaluate(numOne, numTwo),
-                "/" => new Division().Evaluate(numOne, numTwo),
-                "^" => new Degree().Evaluate(numOne, numTwo),
+                "+" => new Plus().Evaluate(nums),
+                "-" => new Minus().Evaluate(nums),
+                "*" => new Multiplication().Evaluate(nums),
+                "/" => new Division().Evaluate(nums),
+                "^" => new Degree().Evaluate(nums),
                 _ => throw new Exception("Неккоректный оператор"),
             };
         }
